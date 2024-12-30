@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <style>
     .button
 </style>
 <head>
     <meta charset="UTF-8">
-    <title>main</title>
+    <title>Mainmenu</title>
 </head>
 <body>
 <h2 style="text-align:center;">Zlayer Zlick</h2>
 
 <h2 style="text-align:center;"><button><h2>Play</h2></button></h2>
 
-<h2 style="text-align:center;"><button><h2>Stats</h2></button></h2>
+<h2 style="text-align:center;"><button onclick="location.href='/index'"><h2>Stats</h2></button></h2>
 
 <h2 style="text-align:center;"><button><h2>Logout</h2></button></h2>
+
+
+
+
+<button onclick="location.href='/game'">Go to the game</button>
+<button onclick="location.href='/stats'">Go to stats info</button>
+<button onclick="location.href='/'">Go to home</button>
 </body>
 </html>
