@@ -19,10 +19,13 @@ public class Player {
     @Column(name="pts")
     private Integer pts;
 
+    @Column(name="ptsPerClick")
+    private Integer ptsPerClick;
+
     public Player (long id, String name) {
         this.id = id;
         this.name = name;
-        this.pts = pts;
+        this.ptsPerClick = ptsPerClick;
 
     }
 
@@ -48,5 +51,13 @@ public class Player {
 
     public void setPts(Integer pts) {
         this.pts = pts;
+    }
+
+    public Integer getPtsPerClick() {
+        return ptsPerClick;
+    }
+
+    public void setPtsPerClick(Integer ptsPerClick) {
+        this.ptsPerClick = ptsPerClick;
     }
 }

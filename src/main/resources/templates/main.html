@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<style>
-    .button
-</style>
+
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="UTF-8; font-family:bradley hand, cursive;">
     <title>Mainmenu</title>
 </head>
-<body>
-<h2 style="text-align:center;">Zlayer Zlick</h2>
+<body style="background-color:#2596be;">
 
-<h2 style="text-align:center;"><button><h2>Play</h2></button></h2>
+<h2 style="text-align:center; font-size: 50px; color: orange; font-family:bradley hand, cursive;">Zlayer Zlick</h2>
 
-<h2 style="text-align:center;"><button onclick="location.href='/index'"><h2>Stats</h2></button></h2>
+<h2 style="text-align:center;"><button onclick="location.href='/game'"><h2>Play</h2></button></h2>
+
+<h2 style="text-align:center;"><button onclick="location.href='/stats'"><h2>Stats</h2></button></h2>
 
 <h2 style="text-align:center;"><button><h2>Logout</h2></button></h2>
-
-
-
 
 <button onclick="location.href='/game'">Go to the game</button>
 <button onclick="location.href='/stats'">Go to stats info</button>
 <button onclick="location.href='/'">Go to home</button>
+
+<script>
+    document.getElementById("pts").innerHTML = "points for click";
+</script>
+
+<button onclick="document.getElementById('demo').innerHTML = Date()">Test button</button>
+<button onclick="document.getElementById('pts').innerHTML = <h2>hello world</h2>">Test pts button</button>
+<button onclick="document.getElementById('pts') = <h2>hello world</h2>">Test pts button x</button>
+
+<button onclick="hello world">Test pts button 2</button>
+
+<p id="pts"></p>
+<p id="demo"></p>
+<img id="myImage" src="train-wreck-crash.gif">
+<img id="myImage2" src="../images/Train.gif" style="width:100px">
+
+
+<h2>Test break</h2>
+<script>
+    v
+    </script>
+
+<div style="text-align:center;width:480px;">
+    <button onmousedown="move('up')" onmouseup="clearmove()" ontouchstart="move('up')">UP</button><br><br>
+    <button onmousedown="move('left')" onmouseup="clearmove()" ontouchstart="move('left')">LEFT</button>
+    <button onmousedown="move('right')" onmouseup="clearmove()" ontouchstart="move('right')">RIGHT</button><br><br>
+    <button onmousedown="move('down')" onmouseup="clearmove()" ontouchstart="move('down')">DOWN</button>
+</div>
+
 </body>
 </html>
