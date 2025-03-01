@@ -3,9 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Game</title>
+    <script>
+        let points = 0;
+        let factory = 0;
+        let factoryWorker = 0;
+
+        function increasePoints() {
+        points += (1+factory);
+        document.getElementById("pointsDisplay").innerText = "Points: " + points;
+        }
+
+        function increaseFactory() {
+            if (points >= 10) {
+        factory += 1;
+        points -= 10;
+        document.getElementById("pointsDisplay").innerText = "Points: " + points;
+        document.getElementById("factoryDisplay").innerText = "Factories: " + factory;
+        } else {
+        alert("Not enough points for another factory")
+        }
+        }
+
+        function increaseWorker() {
+            if (points >= 100) {
+        factoryWorker += 1;
+        points -= 100;
+        document.getElementById("pointsDisplay").innerText = "Points: " + points;
+        document.getElementById("factoryDisplay").innerText = "Factories: " + factory;
+        document.getElementById("workerDisplay").innerText = "Workers: " + factoryWorker;
+        } else {
+        alert("Not enough points for another worker")
+        }
+        }
+
+        function changePoints(newPoints) {
+        points = newPoints;
+        document.getElementById("pointsDisplay").innerText = "Points: " + points;
+        }
+
+        function changeFactories(newFactory) {
+        factory = newFactory;
+        document.getElementById("factoryDisplay").innerText = "Factories: " + factory;
+        }
+
+        function changeFactoryWorkers(newWorker) {
+        factoryWorker = newFactoryWorker;
+        document.getElementById("factoryWorkerDisplay").innerText = "Workers: " + factoryWorker;
+        }
+
+    </script>
 </head>
-<body>
-<h4>here you will soon play the game</h4>
+<body style="background-color:#2596be;">
+<h4>here you will soon play tdhthhe game</h4>
 
 
 
@@ -13,5 +62,33 @@
 
 <button onclick="location.href='/stats'">Go to stats info</button>
 <button onclick="location.href='/'">Go to home</button>
+
+<h2 id="pointsDisplay" style="text-align:center; color:white;">Points: 0</h2>
+<h2 id="factoryDisplay" style="text-align:center; color:white;">Factories: 0</h2>
+<h2 id="factoryWorkerDisplay" style="text-align:center; color:white;">Workers: 0</h2>
+
+
+<h2 style="text-align:center;">
+    <button style="background-color:#630c0c;" onclick="increasePoints()">
+        <h2 style="width:300px; color:white;">Click</h2>
+    </button>
+    <button style="background-color:#630c0c;" onclick="increaseFactory()">
+        <h2 style="width:300px; color:white;">Factory(+1 pts/click, cost 10pts)</h2>
+    </button>
+    <button style="background-color:#630c0c;" onclick="increaseWorker()">
+        <h2 style="width:300px; color:white;">Worker(+10% factorypts/click, cost 100pts)</h2>
+    </button>
+</h2>
+
+<h2 style="text-align:center">
+    <button onclick="changePoints(50)">Set Points to 50</button>
+    <button onclick="changePoints(10)">Set Points to 10</button>
+    <button onclick="changePoints(0)">Set Points to 0</button>
+    <button onclick="changeFactories(0)">Set Factory to 0</button>
+    <button onclick="changeFactories(10)">Set Factory to 10</button>
+    <button onclick="changeFactoryWorkers(0)">Set Worker to 0</button>
+    <button onclick="changeFactoryWorkers(10)">Set Worker to 10</button>
+</h2>
+
 </body>
 </html>
