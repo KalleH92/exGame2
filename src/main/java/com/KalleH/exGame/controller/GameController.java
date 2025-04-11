@@ -1,51 +1,59 @@
 package com.KalleH.exGame.controller;
 
-import com.KalleH.exGame.games.ClickGame;
+import com.KalleH.exGame.games.ClickGameService;
 import com.KalleH.exGame.model.Player;
+import com.KalleH.exGame.Repository.PlayerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
-import java.sql.SQLOutput;
-import java.util.Scanner;
-
-@SpringBootApplication
 @Controller
 public class GameController {
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBootApplication.class, args);
-        ClickGame Clicker = new ClickGame();
-        Clicker.play();
-    }
-    /*@GetMapping("/")
-    public String sayHello(@RequestParam(value = "myName", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name);
-    }
-     */
-Player p1 = new Player();
 
-    Scanner sc = new Scanner(System.in);
+    @Autowired
+    private ClickGameService clickGameService;
+
+    @Autowired
+    private PlayerRepository playerRepository;
+
+    @ModelAttribute("player")
+    public Player loadPlayer() {
+        // Later you'll fetch by logged-in user or session ID.
+        return playerRepository.findById(1L).orElseGet(() -> {
+            Player newPlayer = new Player();
+            newPlayer.setName("DefaultPlayer");
+            newPlayer.setPts(0);
+            newPlayer.setPtsPerClick(1);
+            newPlayer.setFactories(0);
+            newPlayer.setWorkers(0);
+            return playerRepository.save(newPlayer); // Save new player if needed
+        });
+    }
+
+    @GetMapping("/increasePoints")
+    public String increasePoints(@ModelAttribute("player") Player player) {
+        clickGameService.increasePoints(player);
+        return "redirect:/game";
+    }
+
+    @GetMapping("/buyFactory")
+    public String buyFactory(@ModelAttribute("player") Player player) {
+        clickGameService.buyFactory(player);
+        return "redirect:/game";
+    }
+    @GetMapping("/hireWorker")
+    public String hireWorker(@ModelAttribute("player") Player player) {
+        clickGameService.hireWorker(player);
+        return "redirect:/game";
+    }
 
     @GetMapping("/")
     public String home() {
-
-
-
-        p1.setName(sc.nextLine());
-
-        //p1.getName() + 5 = new p1.setName();
-
-        System.out.println("Test 1" + p1.getName() + "Test 2");
-
-
-        System.out.println("Homepage");
-        System.out.println("Test 3" + p1.getName() + "Test 2");
+        System.out.println("Home");
         return "home";
-
-
     }
 
     @GetMapping("/main")
@@ -64,6 +72,4 @@ Player p1 = new Player();
         System.out.println("Game screen");
         return "game";
     }
-
-
 }

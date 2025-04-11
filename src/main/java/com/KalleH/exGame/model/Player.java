@@ -4,30 +4,30 @@ package com.KalleH.exGame.model;
 import jakarta.persistence.*;
 
 @Entity
-
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    public Player() {}
-    public Player(long id) {
-        this.id = id;
-    }
     @Column(name ="name")
     private String name;
     @Column(name="pts")
-    private Integer pts;
+    private Integer pts = 0;
 
     @Column(name="ptsPerClick")
-    private Integer ptsPerClick;
+    private Integer ptsPerClick = 1;
 
-    public Player (long id, String name) {
-        this.id = id;
+    @Column(name="factories")
+    private Integer factories = 0;
+
+    @Column(name="workers")
+    private Integer workers = 0;
+
+    public Player() {}
+    public Player(String name) {
         this.name = name;
-        this.ptsPerClick = ptsPerClick;
-
     }
+
 
     public long getId() {
         return id;
@@ -45,13 +45,9 @@ public class Player {
         this.name = name;
     }
 
-    public Integer getPts() {
-        return pts;
-    }
+    public Integer getPts() {return pts; }
 
-    public void setPts(Integer pts) {
-        this.pts = pts;
-    }
+    public void setPts(Integer pts) {this.pts = pts;}
 
     public Integer getPtsPerClick() {
         return ptsPerClick;
@@ -59,5 +55,21 @@ public class Player {
 
     public void setPtsPerClick(Integer ptsPerClick) {
         this.ptsPerClick = ptsPerClick;
+    }
+
+    public Integer getFactories() {
+        return factories;
+    }
+
+    public void setFactories(Integer factories) {
+        this.factories = factories;
+    }
+
+    public Integer getWorkers() {
+        return workers;
+    }
+
+    public void setWorkers(Integer workers) {
+        this.workers = workers;
     }
 }

@@ -9,46 +9,33 @@
         let factoryWorker = 0;
 
         function increasePoints() {
-        points += (1+factory);
-        document.getElementById("pointsDisplay").innerText = "Points: " + points;
+            fetch('/increasePoints')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Request failed");
+                    }
+                    return response.text();
+                })
+                .then(() => {
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error("Error increasing points", error);
+                });
         }
 
         function increaseFactory() {
-            if (points >= 10) {
-        factory += 1;
-        points -= 10;
-        document.getElementById("pointsDisplay").innerText = "Points: " + points;
-        document.getElementById("factoryDisplay").innerText = "Factories: " + factory;
-        } else {
-        alert("Not enough points for another factory")
-        }
+            fetch('/buyFactory')
+                .then(response => response.text())
+                .then(() => location.reload())
+                .catch(error => console.error("Error buying factory:", error));
         }
 
         function increaseWorker() {
-            if (points >= 100) {
-        factoryWorker += 1;
-        points -= 100;
-        document.getElementById("pointsDisplay").innerText = "Points: " + points;
-        document.getElementById("factoryDisplay").innerText = "Factories: " + factory;
-        document.getElementById("workerDisplay").innerText = "Workers: " + factoryWorker;
-        } else {
-        alert("Not enough points for another worker")
-        }
-        }
-
-        function changePoints(newPoints) {
-        points = newPoints;
-        document.getElementById("pointsDisplay").innerText = "Points: " + points;
-        }
-
-        function changeFactories(newFactory) {
-        factory = newFactory;
-        document.getElementById("factoryDisplay").innerText = "Factories: " + factory;
-        }
-
-        function changeFactoryWorkers(newWorker) {
-        factoryWorker = newWorker;
-        document.getElementById("factoryWorkerDisplay").innerText = "Workers: " + factoryWorker;
+            fetch('/hireWorker')
+                .then(response => response.text())
+                .then(() => location.reload())
+                .catch(error => console.error("Error hiring worker:", error));
         }
 
     </script>
@@ -63,9 +50,9 @@
 <button onclick="location.href='/stats'">Go to stats info</button>
 <button onclick="location.href='/'">Go to home</button>
 
-<h2 id="pointsDisplay" style="text-align:center; color:white;">Points: 0</h2>
-<h2 id="factoryDisplay" style="text-align:center; color:white;">Factories: 0</h2>
-<h2 id="factoryWorkerDisplay" style="text-align:center; color:white;">Workers: 0</h2>
+<h2 id="pointsDisplay" style="text-align:center; color:white;">Points: <span th:text="${player.pts}">0</span></h2>
+<h2 id="factoryDisplay" style="text-align:center; color:white;">Factories: <span th:text="${player.factories}">0</span></h2>
+<h2 id="factoryWorkerDisplay" style="text-align:center; color:white;">Workers: <span th:text="${player.workers}">0</span></h2>
 
 
 <h2 style="text-align:center;">
