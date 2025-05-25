@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class GameController {
@@ -96,6 +97,13 @@ public class GameController {
         player.setWorkers(value);
         playerRepository.save(player);
         return "redirect:/game";
+    }
+
+    @GetMapping("/player/points")
+    @ResponseBody
+    public int getPlayerPoints(HttpSession session) {
+        Player player = getCurrentPlayer(session);
+        return player.getPts();
     }
 
     private Player getCurrentPlayer(HttpSession session) {

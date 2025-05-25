@@ -57,33 +57,44 @@
                 .then(() => location.reload())
                 .catch(error => console.error("Error setting worker:", error));
         }
+        function fetchPoints() {
+            fetch('/player/points')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('pointsDisplayValue').innerText = data;
+                });
+        }
+        setInterval(fetchPoints, 5000);
+
+        fetchPoints();
 
     </script>
 </head>
 <body style="background-color:#2596be;">
-<h4>here you will soon play tddhess game</h4>
+<h2 style="text-align:center; font-size: 50px; color: orange; font-family:bradley hand, cursive;">Zlayer Zlick</h2>
+<h4>Menu:</h4>
 
 
+<div class="container">
+    <button onclick="location.href='/main'">Go to Mainmenu</button>
+    <button onclick="location.href='/stats'">Go to stats info</button>
+    <button onclick="location.href='/'">Go to home</button>
+</div>
 
-<button onclick="location.href='/main'">Go to Mainmenu</button>
-
-<button onclick="location.href='/stats'">Go to stats info</button>
-<button onclick="location.href='/'">Go to home</button>
-
-<h2 id="pointsDisplay" style="text-align:center; color:white;">Points: <span th:text="${player.pts}">0</span></h2>
+<h2 id="pointsDisplay" style="text-align:center; color:white;">Points: <span id="pointsDisplayValue">0</span></h2>
 <h2 id="factoryDisplay" style="text-align:center; color:white;">Factories: <span th:text="${player.factories}">0</span></h2>
 <h2 id="factoryWorkerDisplay" style="text-align:center; color:white;">Workers: <span th:text="${player.workers}">0</span></h2>
 
 
 <h2 style="text-align:center;">
-    <button style="background-color:#630c0c;" onclick="increasePoints()">
-        <h2 style="width:300px; color:white;">Click</h2>
-    </button>
     <button style="background-color:#630c0c;" onclick="increaseFactory()">
-        <h2 style="width:300px; color:white;">Factory(+1 points/click, cost 10pts)</h2>
+        <h2 style="width:300px; color:white;">Teeth(+1 damage/click, cost 10pts)</h2>
+    </button>
+    <button style="background-color:#630c0c;" onclick="increasePoints()">
+        <h2 style="width:300px; color:white;">Chomp</h2>
     </button>
     <button style="background-color:#630c0c;" onclick="increaseWorker()">
-        <h2 style="width:300px; color:white;">Worker(+10% factorypts/click, cost 100pts)</h2>
+        <h2 style="width:300px; color:white;">Offspring(+1 damage/10sec, cost 100pts)</h2>
     </button>
 </h2>
 
