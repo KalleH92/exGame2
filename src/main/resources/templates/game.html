@@ -72,18 +72,19 @@
 </head>
 <body style="background-color:#2596be;">
 <h2 style="text-align:center; font-size: 50px; color: orange; font-family:bradley hand, cursive;">Zlayer Zlick</h2>
-<h4>Menu:</h4>
+
 
 
 <div class="container">
-    <button onclick="location.href='/main'">Go to Mainmenu</button>
-    <button onclick="location.href='/stats'">Go to stats info</button>
-    <button onclick="location.href='/'">Go to home</button>
+    <button onclick="location.href='/main'">Mainmenu</button>
+    <button onclick="location.href='/stats'">Stats info</button>
+    <button onclick="location.href='/'">Home</button>
+    <button onclick="location.href='/player'">Account</button>
 </div>
 
-<h2 id="pointsDisplay" style="text-align:center; color:white;">Points: <span id="pointsDisplayValue">0</span></h2>
-<h2 id="factoryDisplay" style="text-align:center; color:white;">Factories: <span th:text="${player.factories}">0</span></h2>
-<h2 id="factoryWorkerDisplay" style="text-align:center; color:white;">Workers: <span th:text="${player.workers}">0</span></h2>
+<h2 id="pointsDisplay" style="text-align:center; color:white;">Points: <span th:text="${player.pts}">0</span></h2>
+<h2 id="factoryDisplay" style="text-align:center; color:white;">Teeths: <span th:text="${player.factories}">0</span></h2>
+<h2 id="factoryWorkerDisplay" style="text-align:center; color:white;">Offsprings: <span th:text="${player.workers}">0</span></h2>
 
 
 <h2 style="text-align:center;">

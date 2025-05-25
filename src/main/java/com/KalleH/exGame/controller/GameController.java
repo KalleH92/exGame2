@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class GameController {
@@ -23,9 +20,14 @@ public class GameController {
     private PlayerRepository playerRepository;
 
     @ModelAttribute("player")
-    public Player loadPlayer() {
+    public Player loadPlayer(HttpSession session) {
         // Later you'll fetch by logged-in user or session ID.
-        return playerRepository.findById(1L).orElseGet(() -> {
+        Long playerId = (Long) session.getAttribute("playerId");
+        if (playerId == null) {
+            playerId = 1L;
+            session.setAttribute("playerId", playerId);
+        }
+        return playerRepository.findById(playerId).orElseGet(() -> {
             Player newPlayer = new Player();
             newPlayer.setName("DefaultPlayer");
             newPlayer.setPts(0);
@@ -106,15 +108,41 @@ public class GameController {
         return player.getPts();
     }
 
+    @PostMapping("/createPlayer")
+    public String createPlayer(@RequestParam String name, HttpSession session) {
+        Player newPlayer = new Player();
+        newPlayer.setName(name);
+        newPlayer.setPts(0);
+        newPlayer.setPtsPerClick(1);
+        newPlayer.setFactories(0);
+        newPlayer.setWorkers(0);
+        Player saved = playerRepository.save(newPlayer);
+        session.setAttribute("playerId", saved.getId());
+        return "redirect:/game";
+    }
+
+    @PostMapping("/switchPlayer")
+    public String switchPlayer(@RequestParam Long id, HttpSession session) {
+        if (playerRepository.existsById(id)) {
+            session.setAttribute("playerId", id);
+            return "redirect:/game";
+        }
+        return "redirect:/player?error=notfound";
+    }
+
+    @GetMapping("/player")
+    public String playerPage() {
+        return "player";
+    }
+
     private Player getCurrentPlayer(HttpSession session) {
         Long playerId = (Long) session.getAttribute("playerId");
-
         if (playerId == null) {
-            playerId = 1L;
-            session.setAttribute("playerId",playerId);
+            playerId = 1L; // default or redirect to selection
+            session.setAttribute("playerId", playerId);
         }
         return playerRepository.findById(playerId)
-                .orElseThrow(() -> new RuntimeException("Player not found with ID: "));
+                .orElseThrow(() -> new RuntimeException("Player not found with ID: " ));
     }
 
 }

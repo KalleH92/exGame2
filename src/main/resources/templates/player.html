@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Player</title>
+    <h2>Select or Create Player</h2>
+
+    <form action="/createPlayer" method="post">
+        <input type="text" name="name" placeholder="Username" required>
+        <button type="submit">Create New Player</button>
+    </form>
+
+    <form action="/switchPlayer" method="post">
+        <input type="number" name="id" placeholder="Users ID" required>
+        <button type="submit">Switch Player</button>
+    </form>
+    <button onclick="location.href='/main'">Go to Mainmenu</button>
+    <button onclick="location.href='/'">Back</button>
+</head>
+<body>
+
+</body>
+</html>
