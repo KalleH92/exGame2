@@ -5,7 +5,7 @@
     <title>Game</title>
     <script>
         let points = 0;
-        let factory = 0;
+        let fang = 0;
         let factoryWorker = 0;
 
         function increasePoints() {
@@ -24,11 +24,11 @@
                 });
         }
 
-        function increaseFactory() {
-            fetch('/buyFactory')
+        function increaseFang() {
+            fetch('/buyFang')
                 .then(response => response.text())
                 .then(() => location.reload())
-                .catch(error => console.error("Error buying factory:", error));
+                .catch(error => console.error("Error buying fang:", error));
         }
 
         function increaseWorker() {
@@ -45,11 +45,11 @@
                 .then(() => location.reload())
                 .catch(error => console.error("Error setting points:", error));
         }
-        function changeFactories(value) {
-            fetch('/setFactories?value=' + value)
+        function changeFangs(value) {
+            fetch('/setFangs?value=' + value)
                 .then(response => response.text())
                 .then(() => location.reload())
-                .catch(error => console.error("Error setting factories:", error));
+                .catch(error => console.error("Error setting fangs:", error));
         }
         function changeWorkers(value) {
             fetch('/setWorkers?value=' + value)
@@ -72,6 +72,7 @@
 </head>
 <body style="background-color:#2596be;">
 <h2 style="text-align:center; font-size: 50px; color: orange; font-family:bradley hand, cursive;">Zlayer Zlick</h2>
+<p>Current player: Name: <span th:text="${player.name}"></span> id: <span th:text="${player.id}"></span> </p>
 
 
 
@@ -83,19 +84,19 @@
 </div>
 
 <h2 id="pointsDisplay" style="text-align:center; color:white;">Points: <span th:text="${player.pts}">0</span></h2>
-<h2 id="factoryDisplay" style="text-align:center; color:white;">Teeths: <span th:text="${player.factories}">0</span></h2>
-<h2 id="factoryWorkerDisplay" style="text-align:center; color:white;">Offsprings: <span th:text="${player.workers}">0</span></h2>
+<h2 id="fangDisplay" style="text-align:center; color:white;">Fang strength: <span th:text="${player.fangs}">0</span></h2>
+<h2 id="factoryWorkerDisplay" style="text-align:center; color:white;">Egglings: <span th:text="${player.workers}">0</span></h2>
 
 
 <h2 style="text-align:center;">
-    <button style="background-color:#630c0c;" onclick="increaseFactory()">
-        <h2 style="width:300px; color:white;">Teeth(+1 damage/click, cost 10pts)</h2>
+    <button style="background-color:#630c0c;" onclick="increaseFang()">
+        <h2 style="width:300px; color:white;">Fangs(+1 damage/click, cost 10pts)</h2>
     </button>
     <button style="background-color:#630c0c;" onclick="increasePoints()">
         <h2 style="width:300px; color:white;">Chomp</h2>
     </button>
     <button style="background-color:#630c0c;" onclick="increaseWorker()">
-        <h2 style="width:300px; color:white;">Offspring(+1 damage/10sec, cost 100pts)</h2>
+        <h2 style="width:300px; color:white;">Egglings(+1 damage/10sec, cost 100pts)</h2>
     </button>
 </h2>
 
@@ -103,8 +104,8 @@
     <button onclick="changePoints(50)">Set Points to 50</button>
     <button onclick="changePoints(10)">Set Points to 10</button>
     <button onclick="changePoints(0)">Set Points to 0</button>
-    <button onclick="changeFactories(0)">Set Factory to 0</button>
-    <button onclick="changeFactories(10)">Set Factory to 10</button>
+    <button onclick="changeFangs(0)">Set Fang to 0</button>
+    <button onclick="changeFangs(10)">Set Fang to 10</button>
     <button onclick="changeWorkers(0)">Set Worker to 0</button>
     <button onclick="changeWorkers(10)">Set Worker to 10</button>
 </h2>

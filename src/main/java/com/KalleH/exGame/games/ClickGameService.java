@@ -22,28 +22,28 @@ public class ClickGameService {
     public void generatePointsFromOffspring() {
         for (Player player : playerRepository.findAll()) {
             int workers = player.getWorkers();
-            int factories = player.getFactories();
-            int additionalPoints = workers * factories;
+            int fangs = player.getFangs();
+            int additionalPoints = workers * fangs;
             player.setPts(player.getPts() + additionalPoints);
             playerRepository.save(player);
         }
     }
 
     public void increasePoints(Player player) {
-        int pointsToAdd = 1 + player.getFactories();
+        int pointsToAdd = 1 + player.getFangs();
         player.setPts(player.getPts() + pointsToAdd);
         playerRepository.save(player);
         System.out.println("Players points after click: " + player.getPts());
     }
 
-    public void buyFactory(Player player) {
+    public void buyFang(Player player) {
         if (player.getPts() >= 10) {
             player.setPts(player.getPts() - 10);
-            player.setFactories(player.getFactories() + 1);
+            player.setFangs(player.getFangs() + 1);
             playerRepository.save(player);
-            System.out.println("Factory bought. New number of factories: " + player.getFactories());
+            System.out.println("Fang bought. New number of fangs: " + player.getFangs());
         } else {
-            System.out.println("Not enough points to buy a factory.");
+            System.out.println("Not enough points to buy a fang.");
         }
     }
 

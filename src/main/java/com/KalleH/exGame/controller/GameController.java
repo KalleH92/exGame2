@@ -5,8 +5,6 @@ import com.KalleH.exGame.model.Player;
 import com.KalleH.exGame.Repository.PlayerRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +19,6 @@ public class GameController {
 
     @ModelAttribute("player")
     public Player loadPlayer(HttpSession session) {
-        // Later you'll fetch by logged-in user or session ID.
         Long playerId = (Long) session.getAttribute("playerId");
         if (playerId == null) {
             playerId = 1L;
@@ -32,9 +29,9 @@ public class GameController {
             newPlayer.setName("DefaultPlayer");
             newPlayer.setPts(0);
             newPlayer.setPtsPerClick(1);
-            newPlayer.setFactories(0);
+            newPlayer.setFangs(0);
             newPlayer.setWorkers(0);
-            return playerRepository.save(newPlayer); // Save new player if needed
+            return playerRepository.save(newPlayer);
         });
     }
 
@@ -44,9 +41,9 @@ public class GameController {
         return "redirect:/game";
     }
 
-    @GetMapping("/buyFactory")
-    public String buyFactory(@ModelAttribute("player") Player player) {
-        clickGameService.buyFactory(player);
+    @GetMapping("/buyFang")
+    public String buyFang(@ModelAttribute("player") Player player) {
+        clickGameService.buyFang(player);
         return "redirect:/game";
     }
     @GetMapping("/hireWorker")
@@ -86,10 +83,10 @@ public class GameController {
         playerRepository.save(player);
         return "redirect:/game";
     }
-    @GetMapping("/setFactories")
-    public String setFactories(@RequestParam int value, HttpSession session) {
+    @GetMapping("/setFangs")
+    public String setFangs(@RequestParam int value, HttpSession session) {
         Player player = getCurrentPlayer(session);
-        player.setFactories(value);
+        player.setFangs(value);
         playerRepository.save(player);
         return "redirect:/game";
     }
@@ -114,7 +111,7 @@ public class GameController {
         newPlayer.setName(name);
         newPlayer.setPts(0);
         newPlayer.setPtsPerClick(1);
-        newPlayer.setFactories(0);
+        newPlayer.setFangs(0);
         newPlayer.setWorkers(0);
         Player saved = playerRepository.save(newPlayer);
         session.setAttribute("playerId", saved.getId());

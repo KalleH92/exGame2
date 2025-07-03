@@ -17,8 +17,8 @@ public class Player {
     @Column(name="ptsPerClick")
     private Integer ptsPerClick = 1;
 
-    @Column(name="factories")
-    private Integer factories = 0;
+    @Column(name="fangs")
+    private Integer fangs = 0;
 
     @Column(name="workers")
     private Integer workers = 0;
@@ -57,12 +57,12 @@ public class Player {
         this.ptsPerClick = ptsPerClick;
     }
 
-    public Integer getFactories() {
-        return factories;
+    public Integer getFangs() {
+        return fangs;
     }
 
-    public void setFactories(Integer factories) {
-        this.factories = factories;
+    public void setFangs(Integer fangs) {
+        this.fangs = fangs;
     }
 
     public Integer getWorkers() {
