@@ -17,11 +17,17 @@ public class Player {
     @Column(name="ptsPerClick")
     private Integer ptsPerClick = 1;
 
-    @Column(name="fangs")
-    private Integer fangs = 0;
+    @Column(name="fangCount")
+    private Integer fangCount = 0;
 
-    @Column(name="workers")
-    private Integer workers = 0;
+    @Column(name="egglings")
+    private Integer egglings = 0;
+
+    @Column(name="sharpFangs")
+    private Integer sharpFangs = 0;
+
+    @Column(name="hatchSpeed")
+    private Integer hatchSpeed = 0;
 
     public Player() {}
     public Player(String name) {
@@ -57,19 +63,29 @@ public class Player {
         this.ptsPerClick = ptsPerClick;
     }
 
-    public Integer getFangs() {
-        return fangs;
+    public Integer getFangCount() {
+        return fangCount;
     }
 
-    public void setFangs(Integer fangs) {
-        this.fangs = fangs;
+    public void setFangCount(Integer fangCount) {
+        this.fangCount = fangCount;
     }
 
-    public Integer getWorkers() {
-        return workers;
+    public Integer getEgglings() {
+        return egglings;
     }
 
-    public void setWorkers(Integer workers) {
-        this.workers = workers;
+    public void setEgglings(Integer egglings) {
+        this.egglings = egglings;
     }
+
+    public Integer getSharpFangs() {return sharpFangs;}
+
+    public void setSharpFangs(Integer sharpFangs) {this.sharpFangs = sharpFangs;}
+
+    public Integer getHatchSpeed() {return hatchSpeed;}
+
+    public void setHatchSpeed(Integer hatchSpeed) {this.hatchSpeed = hatchSpeed;}
 }
+
+

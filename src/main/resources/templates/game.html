@@ -6,7 +6,8 @@
     <script>
         let points = 0;
         let fang = 0;
-        let factoryWorker = 0;
+        let egglingFang = 0;
+        let sharpFang = 0;
 
         function increasePoints() {
             fetch('/increasePoints')
@@ -31,11 +32,18 @@
                 .catch(error => console.error("Error buying fang:", error));
         }
 
-        function increaseWorker() {
-            fetch('/hireWorker')
+        function increaseEggling() {
+            fetch('/hireEggling')
                 .then(response => response.text())
                 .then(() => location.reload())
-                .catch(error => console.error("Error hiring worker:", error));
+                .catch(error => console.error("Error hiring eggling:", error));
+        }
+
+        function increaseSharpFang() {
+            fetch('/buySharpFang')
+                .then(response => response.text())
+                .then(() => location.reload())
+                .catch(error => console.error("Error buying fang:", error));
         }
 
 
@@ -45,17 +53,23 @@
                 .then(() => location.reload())
                 .catch(error => console.error("Error setting points:", error));
         }
-        function changeFangs(value) {
-            fetch('/setFangs?value=' + value)
+        function changeFangCount(value) {
+            fetch('/setFangCount?value=' + value)
                 .then(response => response.text())
                 .then(() => location.reload())
                 .catch(error => console.error("Error setting fangs:", error));
         }
-        function changeWorkers(value) {
-            fetch('/setWorkers?value=' + value)
+        function changeEgglings(value) {
+            fetch('/setEgglings?value=' + value)
                 .then(response => response.text())
                 .then(() => location.reload())
-                .catch(error => console.error("Error setting worker:", error));
+                .catch(error => console.error("Error setting eggling:", error));
+        }
+        function changeSharpFangs(value) {
+            fetch('/setSharpFangs?value=' + value)
+                .then(response => response.text())
+                .then(() => location.reload())
+                .catch(error => console.error("Error setting sharp fang upgrade:", error));
         }
         function fetchPoints() {
             fetch('/player/points')
@@ -70,8 +84,8 @@
 
     </script>
 </head>
-<body style="background-color:#2596be;">
-<h2 style="text-align:center; font-size: 50px; color: orange; font-family:bradley hand, cursive;">Zlayer Zlick</h2>
+<body style="background-color:#a83f29;">
+<h2 style="text-align:center; font-size: 50px; color: orange; font-family:bradley hand, cursive;">Zpider clicker</h2>
 <p>Current player: Name: <span th:text="${player.name}"></span> id: <span th:text="${player.id}"></span> </p>
 
 
@@ -84,18 +98,22 @@
 </div>
 
 <h2 id="pointsDisplay" style="text-align:center; color:white;">Points: <span th:text="${player.pts}">0</span></h2>
-<h2 id="fangDisplay" style="text-align:center; color:white;">Fang strength: <span th:text="${player.fangs}">0</span></h2>
-<h2 id="factoryWorkerDisplay" style="text-align:center; color:white;">Egglings: <span th:text="${player.workers}">0</span></h2>
+<h2 id="fangDisplay" style="text-align:center; color:white;">Fang strength: <span th:text="${player.fangCount}">0</span></h2>
+<h2 id="sharpFangsDisplay" style="text-align:center; color:white;">Fang sharpness: <span th:text="${player.sharpFangs}">0</span></h2>
+<h2 id="egglingFangDisplay" style="text-align:center; color:white;">Egglings: <span th:text="${player.egglings}">0</span></h2>
 
 
 <h2 style="text-align:center;">
-    <button style="background-color:#630c0c;" onclick="increaseFang()">
-        <h2 style="width:300px; color:white;">Fangs(+1 damage/click, cost 10pts)</h2>
+    <button style="background-color:#35be02;" onclick="increaseFang()">
+        <h2 style="width:300px; color:white;">FangCount(+1 damage/click, cost 10pts)</h2>
     </button>
-    <button style="background-color:#630c0c;" onclick="increasePoints()">
+    <button style="background-color:#35be02;" onclick="increaseSharpFang()">
+        <h2 style="width:300px; color:white;">Sharp Fangs(x2 fang strength, cost 100pts)</h2>
+    </button>
+    <button style="background-color:#ee0000;" onclick="increasePoints()">
         <h2 style="width:300px; color:white;">Chomp</h2>
     </button>
-    <button style="background-color:#630c0c;" onclick="increaseWorker()">
+    <button style="background-color:#b5be02;" onclick="increaseEggling()">
         <h2 style="width:300px; color:white;">Egglings(+1 damage/10sec, cost 100pts)</h2>
     </button>
 </h2>
@@ -104,10 +122,12 @@
     <button onclick="changePoints(50)">Set Points to 50</button>
     <button onclick="changePoints(10)">Set Points to 10</button>
     <button onclick="changePoints(0)">Set Points to 0</button>
-    <button onclick="changeFangs(0)">Set Fang to 0</button>
-    <button onclick="changeFangs(10)">Set Fang to 10</button>
-    <button onclick="changeWorkers(0)">Set Worker to 0</button>
-    <button onclick="changeWorkers(10)">Set Worker to 10</button>
+    <button onclick="changeFangCount(0)">Set Fang to 0</button>
+    <button onclick="changeFangCount(10)">Set Fang to 10</button>
+    <button onclick="changeSharpFangs(0)">Set sharp fang to 0</button>
+    <button onclick="changeSharpFangs(1)">Set sharp fang to 1</button>
+    <button onclick="changeEgglings(0)">Set Egglings to 0</button>
+    <button onclick="changeEgglings(10)">Set Egglings to 10</button>
 </h2>
 
 </body>

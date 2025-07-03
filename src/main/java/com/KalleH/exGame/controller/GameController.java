@@ -29,8 +29,10 @@ public class GameController {
             newPlayer.setName("DefaultPlayer");
             newPlayer.setPts(0);
             newPlayer.setPtsPerClick(1);
-            newPlayer.setFangs(0);
-            newPlayer.setWorkers(0);
+            newPlayer.setFangCount(0);
+            newPlayer.setEgglings(0);
+            newPlayer.setSharpFangs(0);
+            newPlayer.setHatchSpeed(0);
             return playerRepository.save(newPlayer);
         });
     }
@@ -46,9 +48,20 @@ public class GameController {
         clickGameService.buyFang(player);
         return "redirect:/game";
     }
-    @GetMapping("/hireWorker")
-    public String hireWorker(@ModelAttribute("player") Player player) {
-        clickGameService.hireWorker(player);
+    @GetMapping("/hireEggling")
+    public String hireEggling(@ModelAttribute("player") Player player) {
+        clickGameService.hireEggling(player);
+        return "redirect:/game";
+    }
+    @GetMapping("/buySharpFang")
+    public String buySharpFang(@ModelAttribute("player") Player player) {
+        clickGameService.buySharpFang(player);
+        return "redirect:/game";
+    }
+
+    @GetMapping("/buyHatchSpeed")
+    public String buyHatchSpeed(@ModelAttribute("player") Player player) {
+        clickGameService.buyHatchSpeed(player);
         return "redirect:/game";
     }
 
@@ -83,17 +96,33 @@ public class GameController {
         playerRepository.save(player);
         return "redirect:/game";
     }
-    @GetMapping("/setFangs")
-    public String setFangs(@RequestParam int value, HttpSession session) {
+    @GetMapping("/setFangCount")
+    public String setFangCount(@RequestParam int value, HttpSession session) {
         Player player = getCurrentPlayer(session);
-        player.setFangs(value);
+        player.setFangCount(value);
         playerRepository.save(player);
         return "redirect:/game";
     }
-    @GetMapping("/setWorkers")
-    public String setWorkers(@RequestParam int value, HttpSession session) {
+    @GetMapping("/setEgglings")
+    public String setEgglings(@RequestParam int value, HttpSession session) {
         Player player = getCurrentPlayer(session);
-        player.setWorkers(value);
+        player.setEgglings(value);
+        playerRepository.save(player);
+        return "redirect:/game";
+    }
+
+    @GetMapping("/setSharpFangs")
+    public String setSharpFangs(@RequestParam int value, HttpSession session) {
+        Player player = getCurrentPlayer(session);
+        player.setSharpFangs(value);
+        playerRepository.save(player);
+        return "redirect:/game";
+    }
+
+    @GetMapping("/setHatchSpeed")
+    public String setHatchSpeed(@RequestParam int value, HttpSession session) {
+        Player player = getCurrentPlayer(session);
+        player.setHatchSpeed(value);
         playerRepository.save(player);
         return "redirect:/game";
     }
@@ -111,8 +140,10 @@ public class GameController {
         newPlayer.setName(name);
         newPlayer.setPts(0);
         newPlayer.setPtsPerClick(1);
-        newPlayer.setFangs(0);
-        newPlayer.setWorkers(0);
+        newPlayer.setFangCount(0);
+        newPlayer.setEgglings(0);
+        newPlayer.setSharpFangs(0);
+        newPlayer.setHatchSpeed(0);
         Player saved = playerRepository.save(newPlayer);
         session.setAttribute("playerId", saved.getId());
         return "redirect:/game";
