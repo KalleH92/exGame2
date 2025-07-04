@@ -30,9 +30,9 @@ public class GameController {
             newPlayer.setPts(0);
             newPlayer.setPtsPerClick(1);
             newPlayer.setFangCount(0);
-            newPlayer.setEgglings(0);
-            newPlayer.setSharpFangs(0);
-            newPlayer.setHatchSpeed(0);
+            newPlayer.setEgglingCount(0);
+            newPlayer.setSharpFangCount(0);
+            newPlayer.setHatchSpeedCount(0);
             return playerRepository.save(newPlayer);
         });
     }
@@ -103,26 +103,26 @@ public class GameController {
         playerRepository.save(player);
         return "redirect:/game";
     }
-    @GetMapping("/setEgglings")
-    public String setEgglings(@RequestParam int value, HttpSession session) {
+    @GetMapping("/setEgglingCount")
+    public String setEgglingCount(@RequestParam int value, HttpSession session) {
         Player player = getCurrentPlayer(session);
-        player.setEgglings(value);
+        player.setEgglingCount(value);
         playerRepository.save(player);
         return "redirect:/game";
     }
 
-    @GetMapping("/setSharpFangs")
-    public String setSharpFangs(@RequestParam int value, HttpSession session) {
+    @GetMapping("/setSharpFangCount")
+    public String setSharpFangCount(@RequestParam int value, HttpSession session) {
         Player player = getCurrentPlayer(session);
-        player.setSharpFangs(value);
+        player.setSharpFangCount(value);
         playerRepository.save(player);
         return "redirect:/game";
     }
 
-    @GetMapping("/setHatchSpeed")
-    public String setHatchSpeed(@RequestParam int value, HttpSession session) {
+    @GetMapping("/setHatchSpeedCount")
+    public String setHatchSpeedCount(@RequestParam int value, HttpSession session) {
         Player player = getCurrentPlayer(session);
-        player.setHatchSpeed(value);
+        player.setHatchSpeedCount(value);
         playerRepository.save(player);
         return "redirect:/game";
     }
@@ -141,9 +141,9 @@ public class GameController {
         newPlayer.setPts(0);
         newPlayer.setPtsPerClick(1);
         newPlayer.setFangCount(0);
-        newPlayer.setEgglings(0);
-        newPlayer.setSharpFangs(0);
-        newPlayer.setHatchSpeed(0);
+        newPlayer.setEgglingCount(0);
+        newPlayer.setSharpFangCount(0);
+        newPlayer.setHatchSpeedCount(0);
         Player saved = playerRepository.save(newPlayer);
         session.setAttribute("playerId", saved.getId());
         return "redirect:/game";

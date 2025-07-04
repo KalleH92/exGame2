@@ -8,6 +8,7 @@
         let fang = 0;
         let egglingFang = 0;
         let sharpFang = 0;
+        let hatchSpeed = 0;
 
         function increasePoints() {
             fetch('/increasePoints')
@@ -46,6 +47,13 @@
                 .catch(error => console.error("Error buying fang:", error));
         }
 
+        function increaseHatchSpeed() {
+            fetch('/buyHatchSpeed')
+                .then(response => response.text())
+                .then(() => location.reload())
+                .catch(error => console.error("Error buying hatch speed:", error));
+        }
+
 
         function changePoints(value) {
             fetch('/setPoints?value=' + value)
@@ -59,18 +67,25 @@
                 .then(() => location.reload())
                 .catch(error => console.error("Error setting fangs:", error));
         }
-        function changeEgglings(value) {
-            fetch('/setEgglings?value=' + value)
+        function changeEgglingCount(value) {
+            fetch('/setEgglingCount?value=' + value)
                 .then(response => response.text())
                 .then(() => location.reload())
                 .catch(error => console.error("Error setting eggling:", error));
         }
-        function changeSharpFangs(value) {
-            fetch('/setSharpFangs?value=' + value)
+        function changeSharpFangCount(value) {
+            fetch('/setSharpFangCount?value=' + value)
                 .then(response => response.text())
                 .then(() => location.reload())
                 .catch(error => console.error("Error setting sharp fang upgrade:", error));
         }
+        function changeHatchSpeedCount(value) {
+            fetch('/setHatchSpeedCount?value=' + value)
+                .then(response => response.text())
+                .then(() => location.reload())
+                .catch(error => console.error("Error setting hatch speed upgrade:", error));
+        }
+
         function fetchPoints() {
             fetch('/player/points')
                 .then(response => response.text())
@@ -99,8 +114,9 @@
 
 <h2 id="pointsDisplay" style="text-align:center; color:white;">Points: <span th:text="${player.pts}">0</span></h2>
 <h2 id="fangDisplay" style="text-align:center; color:white;">Fang strength: <span th:text="${player.fangCount}">0</span></h2>
-<h2 id="sharpFangsDisplay" style="text-align:center; color:white;">Fang sharpness: <span th:text="${player.sharpFangs}">0</span></h2>
-<h2 id="egglingFangDisplay" style="text-align:center; color:white;">Egglings: <span th:text="${player.egglings}">0</span></h2>
+<h2 id="sharpFangsDisplay" style="text-align:center; color:white;">Fang sharpness: <span th:text="${player.sharpFangCount}">0</span></h2>
+<h2 id="egglingFangDisplay" style="text-align:center; color:white;">Egglings: <span th:text="${player.egglingCount}">0</span></h2>
+<h2 id="hatchSpeedDisplay" style="text-align:center; color:white;">HatchSpeedUpgrades: <span th:text="${player.hatchSpeedCount}">0</span></h2>
 
 
 <h2 style="text-align:center;">
@@ -116,6 +132,9 @@
     <button style="background-color:#b5be02;" onclick="increaseEggling()">
         <h2 style="width:300px; color:white;">Egglings(+1 damage/10sec, cost 100pts)</h2>
     </button>
+    <button style="background-color:#b5be02;" onclick="increaseHatchSpeed()">
+        <h2 style="width:300px; color:white;">Hatch speed(-2s idle income from egglings, cost 50pts)</h2>
+    </button>
 </h2>
 
 <h2 style="text-align:center">
@@ -124,10 +143,12 @@
     <button onclick="changePoints(0)">Set Points to 0</button>
     <button onclick="changeFangCount(0)">Set Fang to 0</button>
     <button onclick="changeFangCount(10)">Set Fang to 10</button>
-    <button onclick="changeSharpFangs(0)">Set sharp fang to 0</button>
-    <button onclick="changeSharpFangs(1)">Set sharp fang to 1</button>
-    <button onclick="changeEgglings(0)">Set Egglings to 0</button>
-    <button onclick="changeEgglings(10)">Set Egglings to 10</button>
+    <button onclick="changeSharpFangCount(0)">Set sharp fang to 0</button>
+    <button onclick="changeSharpFangCount(1)">Set sharp fang to 1</button>
+    <button onclick="changeEgglingCount(0)">Set Egglings to 0</button>
+    <button onclick="changeEgglingCount(10)">Set Egglings to 10</button>
+    <button onclick="changeHatchSpeedCount(0)">Set Hatch speed to 0</button>
+    <button onclick="changeHatchSpeedCount(10)">Set hatch speed to 10</button>
 </h2>
 
 </body>

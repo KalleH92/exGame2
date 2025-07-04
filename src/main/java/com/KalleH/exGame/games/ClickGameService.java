@@ -21,16 +21,16 @@ public class ClickGameService {
     @Scheduled(fixedRate = 10000)
     public void generatePointsFromOffspring() {
         for (Player player : playerRepository.findAll()) {
-            int egglings = player.getEgglings();
+            int egglingCount = player.getEgglingCount();
             int fangCount = player.getFangCount();
-            int additionalPoints = egglings;
+            int additionalPoints = egglingCount;
             player.setPts(player.getPts() + additionalPoints);
             playerRepository.save(player);
         }
     }
 
     public void increasePoints(Player player) {
-        int fangPower = player.getFangCount() * (int) Math.pow(2, player.getSharpFangs());
+        int fangPower = player.getFangCount() * (int) Math.pow(2, player.getSharpFangCount());
         int pointsToAdd = 1 + fangPower;
         player.setPts(player.getPts() + pointsToAdd);
         playerRepository.save(player);
@@ -51,18 +51,18 @@ public class ClickGameService {
     public void hireEggling(Player player) {
         if (player.getPts() >= 100) {
             player.setPts(player.getPts() - 100);
-            player.setEgglings(player.getEgglings() + 1);
+            player.setEgglingCount(player.getEgglingCount() + 1);
             playerRepository.save(player);
-            System.out.println("eggling born. new number of egglings: " + player.getEgglings());
+            System.out.println("eggling born. new number of egglings: " + player.getEgglingCount());
         } else {
             System.out.println("Not enough points to hire a eggling.");
         }
     }
 
     public void buySharpFang(Player player) {
-        if (player.getPts() >= 100 && player.getSharpFangs() == 0) {
+        if (player.getPts() >= 100 && player.getSharpFangCount() == 0) {
             player.setPts(player.getPts()-100);
-            player.setSharpFangs(player.getSharpFangs() + 1);
+            player.setSharpFangCount(player.getSharpFangCount() + 1);
             playerRepository.save(player);
             System.out.println("Sharp fang 1 upgrade bought");
         }else {
@@ -71,9 +71,9 @@ public class ClickGameService {
     }
 
     public void buyHatchSpeed(Player player) {
-        if(player.getPts() >= 50 && player.getHatchSpeed() >= 3) {
+        if(player.getPts() >= 50 && player.getHatchSpeedCount() >= 3) {
             player.setPts(player.getPts()-50);
-            player.setHatchSpeed((player.getHatchSpeed() + 1));
+            player.setHatchSpeedCount((player.getHatchSpeedCount() + 1));
             playerRepository.save(player);
             System.out.println("Hatch speed reduced");
         } else {

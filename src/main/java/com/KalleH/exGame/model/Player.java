@@ -20,14 +20,14 @@ public class Player {
     @Column(name="fangCount")
     private Integer fangCount = 0;
 
-    @Column(name="egglings")
-    private Integer egglings = 0;
+    @Column(name="egglingCount")
+    private Integer egglingCount = 0;
 
-    @Column(name="sharpFangs")
-    private Integer sharpFangs = 0;
+    @Column(name="sharpFangCount")
+    private Integer sharpFangCount = 0;
 
-    @Column(name="hatchSpeed")
-    private Integer hatchSpeed = 0;
+    @Column(name="hatchSpeedCount")
+    private Integer hatchSpeedCount = 0;
 
     public Player() {}
     public Player(String name) {
@@ -71,21 +71,21 @@ public class Player {
         this.fangCount = fangCount;
     }
 
-    public Integer getEgglings() {
-        return egglings;
+    public Integer getEgglingCount() {
+        return egglingCount;
     }
 
-    public void setEgglings(Integer egglings) {
-        this.egglings = egglings;
+    public void setEgglingCount(Integer egglingCount) {
+        this.egglingCount = egglingCount;
     }
 
-    public Integer getSharpFangs() {return sharpFangs;}
+    public Integer getSharpFangCount() {return sharpFangCount;}
 
-    public void setSharpFangs(Integer sharpFangs) {this.sharpFangs = sharpFangs;}
+    public void setSharpFangCount(Integer sharpFangCount) {this.sharpFangCount = sharpFangCount;}
 
-    public Integer getHatchSpeed() {return hatchSpeed;}
+    public Integer getHatchSpeedCount() {return hatchSpeedCount;}
 
-    public void setHatchSpeed(Integer hatchSpeed) {this.hatchSpeed = hatchSpeed;}
+    public void setHatchSpeedCount(Integer hatchSpeedCount) {this.hatchSpeedCount = hatchSpeedCount;}
 }
 
 
